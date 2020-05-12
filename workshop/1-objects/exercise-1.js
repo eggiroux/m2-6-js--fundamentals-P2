@@ -19,7 +19,17 @@
 // A) console.log() your object.
 // B) console.log() a few of the values in the object.
 
-//-------------------------------------------------
+let myObject = {
+  name: {
+    first: "Paul",
+    last: "Bergeron",
+  },
+  age: "22",
+  city: "Chateaubriand",
+  siblings: 4,
+  petName: "Gretchen",
+  monthOfBirth: "July",
+};
 
 // Exercise A
 // ------------
@@ -32,7 +42,9 @@
 
 // HINT: You can just modify the object that you created before.
 
-//-------------------------------------------------
+myObject.petType = "turtoiseshell";
+myObject.shoeSize = 11;
+myObject.isRude = false;
 
 // Exercise B
 // ------------
@@ -47,23 +59,34 @@
 // HINT: Most movies have multiple actors. What data-structure do we use to
 // represent a collection of similar things?
 
-let favoriteMovie = {};
-
-//-------------------------------------------------
+let favoriteMovie = {
+  title: "Hot Fuzz",
+  director: "Edgar Wright",
+  year: 2007,
+  rating: 100,
+  actors: [
+    "Simon Pegg",
+    "Nick Frost",
+    "Olivia Colman",
+    "Timothy Dalton",
+    "Rafe Spall",
+    "Paddy Considine",
+  ],
+};
 
 // Exercise C
 // ------------
 // Fix the attempts to access values in the `person` object:
 
-const key = 'name';
+const key = "name";
 const person = {
-  name: 'Alyssa P. Hacker',
+  name: "Alyssa P. Hacker",
   age: 26,
-  hometown: 'somewhere',
+  hometown: "somewhere",
 };
 
-person[age]; // => 26
-person.key; // => "Alyssa P. Hacker"
+person.age; // => 26
+person[key]; // => "Alyssa P. Hacker"
 
 //-------------------------------------------------
 
@@ -77,18 +100,21 @@ person.key; // => "Alyssa P. Hacker"
 // Example
 const alyssa = {
   name: {
-    first: 'Alyssa',
-    middle: 'P.',
-    last: 'Hacker',
+    first: "Alyssa",
+    middle: "P.",
+    last: "Hacker",
   },
   age: 26,
 };
 
-function fullName(person) {
-  // Your code here
+function fullName({ name }) {
+  let { first, middle, last } = name;
+
+  return `${first} ${middle} ${last}`;
 }
 
 console.log(fullName(alyssa)); // => "Alyssa P. Hacker"
+console.log(fullName(myObject));
 
 // Exercise E
 // ------------
@@ -102,14 +128,17 @@ console.log(fullName(alyssa)); // => "Alyssa P. Hacker"
 
 const rick = {
   name: {
-    first: 'Rick',
-    last: 'Sanchez',
+    first: "Rick",
+    last: "Sanchez",
   },
   age: 66,
 };
 
-function betterFullName(person) {
-  // Your code here
+function betterFullName({ name }) {
+  let nameArray = Object.values(name);
+
+  return nameArray.join(" ");
 }
 
 console.log(betterFullName(rick)); // => "Rick Sanchez"
+console.log(betterFullName(myObject));

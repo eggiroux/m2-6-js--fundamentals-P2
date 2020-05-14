@@ -7,30 +7,30 @@
  */
 
 let inputData = {
-  name: 'Will Byers',
+  name: "Will Byers",
   age: 9,
-  status: 'upside down',
-  superpower1: 'can-blink-lights',
+  status: "upside down",
+  superpower1: "can-blink-lights",
   superpower2: null,
-  address1: '123 Whatever street',
-  addressCity: 'Hawkins',
-  addressState: 'Indiana',
-  addressCountry: 'United States',
-  motherName: 'Joyce Byers',
+  address1: "123 Whatever street",
+  addressCity: "Hawkins",
+  addressState: "Indiana",
+  addressCountry: "United States",
+  motherName: "Joyce Byers",
   motherAge: 35,
-  motherStatus: 'worried',
+  motherStatus: "worried",
   motherSuperpower1: null,
-  motherSuperpower1: null,
-  bestFriendName: 'Mike Wheeler',
+  motherSuperpower2: null,
+  bestFriendName: "Mike Wheeler",
   bestFriendAge: 9,
-  bestFriendStatus: 'frenetic',
+  bestFriendStatus: "frenetic",
   bestFriendSuperpower1: null,
-  bestFriendSuperpower1: null,
-  girlfriendName: 'Eleven',
+  bestFriendSuperpower2: null,
+  girlfriendName: "Eleven",
   girlfriendAge: 9,
-  girlfriendStatus: 'angry',
-  girlfriendSuperpower1: 'telepathy',
-  girlfriendSuperpower1: 'multiverse portal sealing',
+  girlfriendStatus: "angry",
+  girlfriendSuperpower1: "telepathy",
+  girlfriendSuperpower2: "multiverse portal sealing",
 };
 
 /*
@@ -88,7 +88,84 @@ For example, the main superpowers array should be:
 */
 
 function transformData(data) {
-  // Your code here
+  let {
+    name,
+    age,
+    status,
+    address1,
+    addressCity,
+    addressState,
+    addressCountry,
+    superpower1,
+    superpower2,
+    motherName,
+    motherAge,
+    motherStatus,
+    motherSuperpower1,
+    motherSuperpower2,
+    girlfriendName,
+    girlfriendAge,
+    girlfriendStatus,
+    girlfriendSuperpower1,
+    girlfriendSuperpower2,
+  } = data;
+
+  let outputData = {};
+
+  outputData.name = name;
+  outputData.age = age;
+  outputData.status = status;
+
+  outputData.address = {
+    streetAddress: address1,
+    city: addressCity,
+    state: addressState,
+    country: addressCountry,
+  };
+
+  outputData.superpowers = [];
+  maybeAddSuperpowers(superpower1, superpower2, outputData.superpowers);
+
+  outputData.relationships = [];
+
+  outputData.relationships.push({
+    type: "mother",
+    name: motherName,
+    age: motherAge,
+    status: motherStatus,
+    superpowers: [],
+  });
+
+  maybeAddSuperpowers(
+    motherSuperpower1,
+    motherSuperpower2,
+    outputData.relationships[0].superpowers
+  );
+
+  outputData.relationships.push({
+    type: "girlfriend",
+    name: girlfriendName,
+    age: girlfriendAge,
+    status: girlfriendStatus,
+    superpowers: [],
+  });
+
+  maybeAddSuperpowers(
+    girlfriendSuperpower1,
+    girlfriendSuperpower2,
+    outputData.relationships[1].superpowers
+  );
+
+  return outputData;
+}
+
+function maybeAddSuperpowers(power1, power2, array) {
+  if (power1) {
+    array.push(power1);
+  }
+  if (power2) {
+    array.push(power2);
+  }
 }
 
 /*
